@@ -1,0 +1,53 @@
+{
+  "cSpell.words": [
+    "cmap",
+    "commitlint",
+    "dashboarddata",
+    "Pinia",
+    "singleline",
+    "Uearth",
+    "unplugin",
+    "vite",
+    "vitejs",
+    "vueuse"
+  ],
+  // 使用Linux系统的换行方式
+  "files.eol": "\n",
+  // Tab 键使用 2 个空格
+  "editor.tabSize": 2,
+  // 内容超过 100 列自动换行展示
+  "editor.wordWrapColumn": 100,
+  "editor.wordWrap": "wordWrapColumn",
+  // 按 Ctrl + S 进行保存时，自动格式化代码
+  "editor.formatOnSave": true,
+  // 编辑器在输入内容后自动格式化
+  "editor.formatOnType": true,
+  // 进行内容粘贴后，格式化该内容
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.useTabs": false,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "es5",
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "always",
+  "prettier.vueIndentScriptAndStyle": false,
+  "prettier.endOfLine": "lf",
+  "prettier.printWidth": 100,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

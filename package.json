@@ -1,0 +1,57 @@
+{
+  "name": "gxrmyy",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode development",
+    "build": "vite build --mode test",
+    "buildPro": "vite build --mode production",
+    "preview": "vite preview",
+    "upload": "pushProject ./dist --dir=qzzgyy --name=广西区人民医院"
+  },
+  "dependencies": {
+    "@vicons/fluent": "^0.12.0",
+    "animate.css": "^4.1.1",
+    "axios": "^0.27.2",
+    "echarts": "^5.4.1",
+    "echarts-gl": "^2.0.9",
+    "element-plus": "^2.2.10",
+    "json-editor-vue3": "^1.0.8",
+    "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1",
+    "object-hash": "^3.0.0",
+    "pinia": "^2.0.16",
+    "uuid": "^9.0.0",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@types/node": "^18.14.2",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vueuse/core": "^10.0.2",
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "path-browserify": "^1.0.1",
+    "sass": "^1.58.3",
+    "stylelint": "^15.2.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-order": "^6.0.2",
+    "stylelint-selector-bem-pattern": "^2.1.1",
+    "transformation-matrix": "^2.15.0",
+    "typescript": "^4.9.3",
+    "unplugin-auto-import": "^0.15.0",
+    "unplugin-vue-components": "^0.24.0",
+    "vite": "^4.1.0",
+    "vue-tsc": "^1.0.24"
+  },
+  "volta": {
+    "node": "18.14.2"
+  }
+}

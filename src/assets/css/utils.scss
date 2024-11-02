@@ -1,0 +1,233 @@
+// 常用的效果样式
+
+// flex布局设置 @include flex(space-around, center, row);
+@mixin flex($j: center, $a: center, $d: row) {
+  display: flex;
+  flex-direction: $d;
+  align-items: $a;
+  justify-content: $j;
+}
+
+// 文本单行溢出显示省略号 @include text-overflow;
+@mixin text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 清除浮动 @include clearfix;
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// 滚动条样式 示例: @include scrollBar;
+// ul {
+//   @include scrollBar;
+// }
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: rgba(14, 46, 48, 1);
+    // background: red;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+  }
+}
+
+// 制作三角形 示例：
+// span {
+//   display: inline-block;
+//   width: 5px;
+//   height: 5px;
+//   @include triangle(18px, 16px, red, right) right代表三角形尖的那一端朝向右
+// }
+@mixin triangle($width, $height, $color, $direction) {
+  $width: calc($width / 2);
+  $color-border-style: $height solid $color;
+  $transparent-border-style: $width solid transparent;
+  height: 0;
+  width: 0;
+
+  @if $direction==up {
+    border-bottom: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+
+  @else if $direction==right {
+    border-left: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+
+  @else if $direction==down {
+    border-top: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+
+  @else if $direction==left {
+    border-right: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+}
+
+// 制作圆 @include circle(50px, red);
+@mixin circle($radius, $bg) {
+  display: inline-block;
+  width: $radius;
+  height: $radius;
+  border-radius: 50%;
+  background-color: $bg;
+}
+
+// 图片填充背景容器 @include circle(100%, 100%, url('./img.png'));
+@mixin img-box($width, $height, $bg) {
+  width: $width;
+  height: $height;
+  background-image: $bg;
+  background-position: center;
+  background-size: $width $height;
+  background-repeat: no-repeat;
+}
+
+// 右侧边栏
+@mixin rightSide() {
+  .page {
+    width: 100%;
+    height: 100%;
+  }
+
+  .module-left,
+  .module-right {
+    // background: rgba(112, 112, 112, 0.384);
+    width: 750px;
+    height: 1950px;
+    position: absolute;
+    top: 125px;
+    pointer-events: all;
+    padding: 0 31px;
+
+    .scale-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .module-left {
+    align-items: flex-start;
+    left: 0;
+  }
+
+  .module-right {
+    align-items: flex-end;
+    right: 0;
+  }
+}
+
+/**
+ * @Author liaoJie
+ * @Change liaoJie
+ * @Date 2021-12-10 14:18:13
+ * @Description 全局公共变量与函数
+ */
+
+// 设计图基础尺寸
+$vw-base: 1920;
+$vh-base: 1080;
+
+// 计算视口宽度,vw()中的参数，直接传像素值
+@function foo-vw($px) {
+  @return calc($px / $vw-base) * 100vw;
+}
+
+// 计算视口高度, vh()中的参数，直接传像素值
+@function foo-vh($px) {
+  @return calc($px / $vh-base) * 100vh;
+}
+
+@mixin flex($j: center, $a: center, $d: row) {
+  display: flex;
+  flex-direction: $d;
+  align-items: $a;
+  justify-content: $j;
+}
+
+@mixin text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 绘制三角形
+@mixin triangle($width, $height, $color, $direction) {
+  $width: calc($width / 2);
+  $color-border-style: $height solid $color;
+  $transparent-border-style: $width solid transparent;
+  width: 0;
+  height: 0;
+
+  @if $direction ==up {
+    border-right: $transparent-border-style;
+    border-bottom: $color-border-style;
+    border-left: $transparent-border-style;
+  }
+
+  @else if $direction ==right {
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+    border-left: $color-border-style;
+  }
+
+  @else if $direction ==down {
+    border-top: $color-border-style;
+    border-right: $transparent-border-style;
+    border-left: $transparent-border-style;
+  }
+
+  @else if $direction ==left {
+    border-top: $transparent-border-style;
+    border-right: $color-border-style;
+    border-bottom: $transparent-border-style;
+  }
+}
+
+// 柱状图
+@mixin bar($width, $height, $bg, $time) {
+  width: $width;
+  height: $height;
+  background-color: $bg;
+  transition: all $time;
+}
+
+// 圆
+@mixin circle($radius, $bg) {
+  display: inline-block;
+  width: $radius;
+  height: $radius;
+  border-radius: 50%;
+  background-color: $bg;
+}
+
+// 图片填充背景容器
+@mixin img-box($width: 100%, $height: 100%, $bg) {
+  width: $width;
+  height: $height;
+  background-image: $bg;
+  background-position: center;
+  background-size: $width $height;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,57 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
+    "airbnb-base"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "public/", "commitlint.config.js", "*.d.ts"],
+  "globals": {
+    "THING": "readonly",
+    "CMAP": "readonly",
+    "defineProps": "readonly",
+    "defineExpose": "readonly",
+    "withDefaults": "readonly",
+    "spray": "readonly"
+  },
+  "rules": {
+    "comma-dangle": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    // vue
+    "vue/max-attributes-per-line": "off",
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/html-self-closing": [
+      "warn",
+      {
+        "html": {
+          "normal": "never",
+          "void": "always"
+        }
+      }
+    ],
+    // 组件使用时的命名方式为 kebab-case
+    "vue/component-name-in-template-casing": [
+      "warn",
+      "kebab-case",
+      {
+        "registeredComponentsOnly": false
+      }
+    ]
+  }
+}

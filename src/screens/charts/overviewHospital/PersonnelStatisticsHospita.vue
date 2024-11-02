@@ -1,0 +1,162 @@
+<!--
+ * @Description: 人员分时段统计
+ * @Author: xiaojun.xiong
+ * @Date: 2023-08-28 10:59:11
+ * @LastEditTime: 2023-08-28 10:59:11
+-->
+
+<script lang="ts" setup>
+import { hexToRgba } from '@/utils/common';
+import { computeToRealSize } from '@/utils/tool';
+import type { ComposeOption } from 'echarts';
+import type { LineSeriesOption } from 'echarts/charts';
+import { overviewHospitalStore } from '@/store/overviewHospital';
+import { useTimeoutFn } from '@vueuse/core';
+
+const overviewHospital = overviewHospitalStore();
+const data = computed(() => overviewHospital.data.personnelStatistics || {});
+
+const colorList = ['#4BAFF9', '#F9DA4B', '#4BF3F9', '#A3D8FF'];
+
+const yAxisData = computed(() => data.value?.dataList || []);
+const xAxisData = computed(() => data.value?.date || []);
+
+const eChartsOption = computed(() => {
+  const series: LineSeriesOption[] = yAxisData.value.map((item, idx) => {
+    return {
+      name: `${item.name}`,
+      type: 'line',
+      showSymbol: false,
+      smooth: true,
+      areaStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: hexToRgba(colorList[idx], 0.4),
+            },
+            {
+              offset: 1,
+              color: hexToRgba(colorList[idx], 0),
+            },
+          ],
+          global: false,
+        },
+      },
+
+      label: {
+        show: false,
+      },
+      itemStyle: {
+        color: colorList[idx],
+        borderWidth: 1,
+      },
+      data: item.data,
+    };
+  });
+
+  const eChartsOption: ComposeOption<LineSeriesOption> = {
+    tooltip: {
+      showContent: true,
+      trigger: 'axis',
+      backgroundColor: 'rgba(15, 25, 39, 0.8)',
+      borderColor: 'rgba(145, 161, 180, 0.8)',
+      textStyle: {
+        color: '#fff',
+      },
+    },
+    legend: {
+      show: true,
+      // icon: 'rect',
+      top: 2,
+      // right: computeToRealSize(70),
+      itemGap: 45,
+      itemWidth: 12,
+      itemHeight: 4,
+      textStyle: {
+        color: '#fff',
+        fontSize: 12,
+        fontFamily: 'OPPOSans',
+        fontWeight: 400,
+        padding: [0, 0, 0, 0],
+      },
+    },
+    grid: {
+      top: '17%',
+      left: '1%',
+      right: '0%',
+      bottom: '5%',
+      containLabel: true,
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: true,
+      data: xAxisData.value,
+      axisLabel: {
+        fontSize: 14,
+        padding: [10, 0, 0, 0],
+        fontFamily: 'DINPro',
+        color: 'rgba(123, 157, 190, 1)',
+      },
+      axisTick: { show: false },
+      axisLine: { show: false },
+    },
+    yAxis: {
+      type: 'value',
+      name: '',
+      // nameGap: 30,
+      // interval: 5,
+      axisLabel: {
+        padding: [0, 0, 0, 0],
+        fontSize: 14,
+        fontFamily: 'DINPro',
+        color: 'rgba(123, 157, 190, 1)',
+      },
+      splitLine: {
+        lineStyle: {
+          width: 1,
+          color: 'rgba(123, 157, 190, 0.3)',
+        },
+      },
+    },
+
+    series,
+  };
+  return eChartsOption;
+});
+</script>
+
+<template>
+  <div class="personnel-statistics">
+    <card-module title="人员分时段统计">
+      <div class="unit">{{ data.unit }}</div>
+      <base-chart class="chart" :option="eChartsOption" />
+    </card-module>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.personnel-statistics {
+  height: 228px;
+  width: 410px;
+  margin-top: 35px;
+  pointer-events: all;
+  position: relative;
+  .unit {
+    position: absolute;
+    left: 14px;
+    top: 38px;
+    font-size: 14px;
+  }
+  .chart {
+    width: 100%;
+    height: 180px;
+    margin-top: 8px;
+  }
+}
+</style>

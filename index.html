@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" style="--targetWidth: 1; --realWidth: 1">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <script src="/config.js"></script>
+  <script src="./mock/home.js"></script>
+  <script src="./mock/overviewHospital.js"></script>
+  <script src="./mock/energyMonitoring.js"></script>
+  <script src="./mock/assetManagement.js"></script>
+  <script src="./mock/intelligentMonitoring.js"></script>
+  <script src="./mock/intelligentPrevention.js"></script>
+  <script src="./mock/alarmData.js"></script>
+  <script src="./mock/login.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base-demo</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+  <script>
+    // 添加模型缓存，加快加载速度
+    if (typeof CachedDownloader !== 'undefined') {
+      CachedDownloader.getInstance().onRequest = function (url) {
+        var extensions = ['gltf', 'bin', '85c27885e6aba2862cdb7835397e58cc.geojson'];
+        if (url?.getExtension) {
+          var extension = url?.getExtension();
+          if (extensions?.indexOf(extension?.toLowerCase()) === -1) {
+            return false;
+          }
+          return true;
+        }
+        return false;
+      };
+    }
+  </script>
+</body>
+
+</html>
